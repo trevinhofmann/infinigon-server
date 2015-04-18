@@ -24,9 +24,10 @@ function SocketHandler(io, gamemanager){
       } catch (e) {
         console.log(e.message);
         socket.emit('err', e.message);
+        return;
       }
       piece = gamemanager.newPlayer(room, id);
-      emitToRoom(room, 'instantiate', [piece.getInitialization()])
+      emitToRoom(room, 'instantiate', [piece.getOptions()])
       var init = game.getInitialization(id);
       socket.emit('welcome', init);
       try {
@@ -38,14 +39,14 @@ function SocketHandler(io, gamemanager){
     });
 
     socket.on('disconnect', function() {
-      try {
+      //try {
         removeFromRoom(room, socket);
         gamemanager.removePlayer(room, id);
         emitToRoom(room, 'remove', [id]);
-      } catch (e) {
-        console.log(e.message);
-        socket.emit('err', e.message);
-      }
+      //} catch (e) {
+      //  console.log(e.message);
+      //  socket.emit('err', e.message);
+      //}
     });
 
     socket.on('leftClick', function(target) {
