@@ -1,2 +1,4 @@
 .idea/*
 public/components/*
+node_modules/*
+npm-debug.log
