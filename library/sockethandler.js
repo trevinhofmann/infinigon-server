@@ -40,14 +40,9 @@ function SocketHandler(io, gamemanager){
     });
 
     socket.on('disconnect', function() {
-      try {
-        removeFromRoom(room, socket);
-        gamemanager.removePlayer(room, id);
-        emitToRoom(room, 'remove', [id]);
-      } catch (e) {
-        console.log(e.message);
-        socket.emit('err', e.message);
-      }
+      removeFromRoom(room, socket);
+      gamemanager.removePlayer(room, id);
+      emitToRoom(room, 'remove', [id]);
     });
 
     socket.on('leftClick', function(target) {
