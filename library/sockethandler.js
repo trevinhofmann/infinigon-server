@@ -47,7 +47,12 @@ function SocketHandler(io, gamemanager){
 
     socket.on('leftClick', function(target) {
       try {
-        piece.fire(target);
+        var projectile = piece.fire(target, function(projectileId) {
+          emitToRoom(room, 'remove', [projectileId]);
+        });
+        if (typeof projectile !== 'undefined') {
+          emitToRoom(room, 'instantiate', [projectile.getOptions()]);
+        }
       } catch (e) {
         console.log(e.message);
       }
