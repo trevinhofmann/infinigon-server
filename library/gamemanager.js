@@ -13,8 +13,8 @@ GameManager.prototype.getRoom = function(room) {
   return this.games[room].getGame();
 };
 
-GameManager.prototype.newPlayer = function(room, id) {
-  return this.games[room].newPlayer(id);
+GameManager.prototype.newPlayer = function(room, id, deathCallback) {
+  return this.games[room].newPlayer(id, deathCallback);
 };
 
 GameManager.prototype.removePlayer = function(room, id) {

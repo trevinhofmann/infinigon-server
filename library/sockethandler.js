@@ -26,7 +26,10 @@ function SocketHandler(io, gamemanager){
         socket.emit('err', e.message);
         return;
       }
-      piece = gamemanager.newPlayer(room, id);
+      piece = gamemanager.newPlayer(room, id, function(id) {
+        console.log('removed');
+        emitToRoom(room, 'remove', [id]);
+      });
       emitToRoom(room, 'instantiate', [piece.getOptions()])
       var init = game.getInitialization(id);
       init.id = id;
@@ -42,7 +45,7 @@ function SocketHandler(io, gamemanager){
     socket.on('disconnect', function() {
       removeFromRoom(room, socket);
       gamemanager.removePlayer(room, id);
-      emitToRoom(room, 'remove', [id]);
+      //emitToRoom(room, 'remove', [id]);
     });
 
     socket.on('leftClick', function(target) {

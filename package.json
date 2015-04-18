@@ -1,6 +1,6 @@
 {
   "name": "infinigon-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A server which hosts multiplayer games using the Infinigon game engine.",
   "scripts": {
     "start": "node index.js"
